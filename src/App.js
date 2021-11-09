@@ -1,9 +1,11 @@
+import { Route } from "react-router";
+
 import Home from "./pages/home";
 
 function App() {
   return (
     <>
-      <Home />
+      <Route exact path="/:folderId" component={Home} />
     </>
   );
 }

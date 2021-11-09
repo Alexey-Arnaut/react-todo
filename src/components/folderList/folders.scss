@@ -35,6 +35,13 @@
     }
 }
 
+.folder--active {
+
+    &::before {
+        opacity: 1;
+    }
+}
+
 .folder__title {
     font-size: var(--font-size-md);
 }
