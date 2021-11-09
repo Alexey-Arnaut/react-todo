@@ -1,0 +1,19 @@
+.aside {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    min-width: 320px;
+    background-color: var(--secondary-bg-color);
+    padding: 10px 10px;
+}
+
+.aside__field {
+
+    .form__field {
+        border-color: var(--primary-border-color);
+    }
+
+    .form__label {
+        background-color: var(--secondary-bg-color);
+    }
+}

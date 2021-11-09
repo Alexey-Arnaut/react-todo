@@ -1,0 +1,32 @@
+.form {
+    width: 100%;
+    padding: 0 10px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+}
+
+.form__field {
+    width: 100%;
+    border: 2px solid var(--secondary-border-color);
+    padding: 10px 15px;
+    border-radius: var(--primary-border-radius);
+    font-size: var(--font-size-md);
+}
+
+.form__label {
+    position: absolute;
+    left: 20px;
+    z-index: -1;
+    transition: 0.5s;
+    font-size: var(--font-size-md);
+    background-color: var(--primary-bg-color);
+}
+
+.form__field:focus~.form__label,
+.form__field:not(:placeholder-shown).form__field:not(:focus)~.form__label {
+    z-index: 1;
+    transform: translateY(-150%);
+    font-size: var(--font-size-sm);
+}

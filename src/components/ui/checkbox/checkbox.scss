@@ -1,0 +1,33 @@
+.checkbox {
+    width: 25px;
+    height: 25px;
+    border: 2px solid var(--tertiary-border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--primary-border-radius);
+    margin-right: 10px;
+    cursor: pointer;
+    transition: 0.5s;
+
+    svg {
+        width: 15px;
+        opacity: 0;
+    }
+
+    &:hover {
+        background-color: var(--tertiary-bg-color);
+
+        svg {
+            opacity: 1;
+        }
+    }
+}
+
+.checkbox--active {
+    background-color: var(--tertiary-bg-color);
+
+    svg {
+        opacity: 1;
+    }
+}

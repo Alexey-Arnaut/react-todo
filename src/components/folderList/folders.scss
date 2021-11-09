@@ -1,0 +1,40 @@
+.folders {
+    margin: 10px 0;
+    flex: 1 1 auto;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.folder {
+    padding: 15px 10px;
+    background-color: var(--primary-bg-color);
+    margin-top: 10px;
+    border-radius: var(--primary-border-radius);
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    &::before {
+        position: absolute;
+        content: '';
+        width: 10px;
+        height: 10px;
+        background-color: var(--tertiary-bg-color);
+        right: 10px;
+        border-radius: 50%;
+        opacity: 0;
+        transition: 0.5s;
+    }
+
+    &:hover {
+
+        &::before {
+            opacity: 1;
+        }
+    }
+}
+
+.folder__title {
+    font-size: var(--font-size-md);
+}
