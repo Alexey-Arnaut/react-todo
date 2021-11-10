@@ -2,13 +2,18 @@ import Checkbox from "../../ui/checkbox";
 
 import "../todos.scss";
 
-const Todo = ({ title, completed, id, removeTodo, changeState }) => {
+const Todo = ({ title, completed, id, remove, changeState, openModal }) => {
   return (
     <div className="todo">
       <Checkbox completed={completed} changeState={changeState} id={id} />
       <h2 className="todo__title">{title}</h2>
       <div className="todo__buttons">
-        <button className="todo__button">
+        <button
+          className="todo__button"
+          onClick={() => {
+            openModal(title, id);
+          }}
+        >
           <svg
             width="25"
             height="25"
@@ -22,7 +27,7 @@ const Todo = ({ title, completed, id, removeTodo, changeState }) => {
             />
           </svg>
         </button>
-        <button className="todo__button" onClick={() => removeTodo(id)}>
+        <button className="todo__button" onClick={() => remove(id)}>
           <svg
             width="25"
             height="30"

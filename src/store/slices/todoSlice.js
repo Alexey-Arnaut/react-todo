@@ -50,10 +50,21 @@ export const changeStateTodo = createAsyncThunk(
   "todos/changeStateTodo",
 
   async ({ id, completed }, { dispatch }) => {
-    dispatch(changeState(id));
+    dispatch(changeState({ id, completed }));
 
     await updateDoc(doc(db, "todos", id), {
       completed: !completed,
+    });
+  }
+);
+
+export const changeNameTodo = createAsyncThunk(
+  "todos/changeNameTodo",
+  async ({ title, id }, { dispatch }) => {
+    dispatch(changeName({ id, title }));
+
+    await updateDoc(doc(db, "todos", id), {
+      title: title,
     });
   }
 );
@@ -72,9 +83,12 @@ const todosSlice = createSlice({
       state.todos = state.todos.filter((todo) => todo.id !== action.payload);
     },
     changeState(state, action) {
-      const stateTodo = state.todos.find((todo) => todo.id === action.payload);
-
-      stateTodo.completed = !stateTodo.completed;
+      state.todos.find((todo) => todo.id === action.payload.id).completed =
+        !action.payload.completed;
+    },
+    changeName(state, action) {
+      state.todos.find((todo) => todo.id === action.payload.id).title =
+        action.payload.title;
     },
   },
   extraReducers: {
@@ -88,5 +102,5 @@ const todosSlice = createSlice({
   },
 });
 
-const { todos, remove, changeState } = todosSlice.actions;
+const { todos, remove, changeState, changeName } = todosSlice.actions;
 export default todosSlice.reducer;

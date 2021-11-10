@@ -1,0 +1,77 @@
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(#000000, 50%);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.modal--active {
+    opacity: 1;
+    pointer-events: all;
+
+    .modal-content {
+        transform: translate(0);
+    }
+}
+
+.modal-content {
+    max-width: 800px;
+    width: 100%;
+    background-color: var(--primary-bg-color);
+    padding: 20px;
+    border-radius: var(--secondary-border-radius);
+    position: relative;
+    transform: translateY(-100px);
+    transition: 0.5s;
+}
+
+.modal__close {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    right: 10px;
+    top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &::before,
+    &::after {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 4px;
+        left: 0;
+        background-color: var(--tertiary-bg-color);
+        border-radius: var(--secondary-border-radius);
+        transition: 0.5s;
+    }
+
+    &::before {
+        transform: rotate(45deg);
+    }
+
+    &::after {
+        transform: rotate(-45deg);
+    }
+
+    &:hover {
+
+        &::before {
+            transform: rotate(40deg);
+        }
+
+        &::after {
+            transform: rotate(-40deg);
+        }
+    }
+}
