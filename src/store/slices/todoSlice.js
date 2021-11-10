@@ -8,6 +8,7 @@ import {
   addDoc,
   doc,
   deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 
 export const getTodos = createAsyncThunk("todos/getTodos", async (folderId) => {
@@ -45,6 +46,17 @@ export const deleteTodo = createAsyncThunk(
     dispatch(remove(id));
   }
 );
+export const changeStateTodo = createAsyncThunk(
+  "todos/changeStateTodo",
+
+  async ({ id, completed }, { dispatch }) => {
+    dispatch(changeState(id));
+
+    await updateDoc(doc(db, "todos", id), {
+      completed: !completed,
+    });
+  }
+);
 
 const todosSlice = createSlice({
   name: "todos",
@@ -59,6 +71,11 @@ const todosSlice = createSlice({
     remove(state, action) {
       state.todos = state.todos.filter((todo) => todo.id !== action.payload);
     },
+    changeState(state, action) {
+      const stateTodo = state.todos.find((todo) => todo.id === action.payload);
+
+      stateTodo.completed = !stateTodo.completed;
+    },
   },
   extraReducers: {
     [getTodos.pending]: (state) => {
@@ -71,5 +88,5 @@ const todosSlice = createSlice({
   },
 });
 
-const { todos, remove } = todosSlice.actions;
+const { todos, remove, changeState } = todosSlice.actions;
 export default todosSlice.reducer;

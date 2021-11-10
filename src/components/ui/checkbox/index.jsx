@@ -1,8 +1,13 @@
 import "./checkbox.scss";
 
-const Checkbox = ({ completed }) => {
+const Checkbox = ({ completed, changeState, id }) => {
   return (
-    <div className={`checkbox ${completed ? "checkbox--active" : ""}`}>
+    <div
+      className={`checkbox ${completed ? "checkbox--active" : ""}`}
+      onClick={() => {
+        changeState(id, completed);
+      }}
+    >
       <svg
         width="20"
         height="15"

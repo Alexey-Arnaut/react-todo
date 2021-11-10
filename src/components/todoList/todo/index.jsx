@@ -2,10 +2,10 @@ import Checkbox from "../../ui/checkbox";
 
 import "../todos.scss";
 
-const Todo = ({ title, completed, id, removeTodo }) => {
+const Todo = ({ title, completed, id, removeTodo, changeState }) => {
   return (
     <div className="todo">
-      <Checkbox completed={completed} />
+      <Checkbox completed={completed} changeState={changeState} id={id} />
       <h2 className="todo__title">{title}</h2>
       <div className="todo__buttons">
         <button className="todo__button">

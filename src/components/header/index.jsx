@@ -1,11 +1,22 @@
-import './header.scss'
+import { useLocation } from "react-router";
+import { useSelector } from "react-redux";
+
+import "./header.scss";
 
 const Header = () => {
-    return (
-        <div className="header">
-            <h1 className="header__title">Задачи</h1>
-        </div>
-    )
-}
+  const { pathname } = useLocation();
+  const folders = useSelector((state) => state.folders.folders).find(
+    (folder) => folder.id === pathname.slice(1)
+  );
 
-export default Header
+  const activeFolder =
+    pathname === "/react-todo/" ? "Задачи" : folders && folders.title;
+
+  return (
+    <div className="header">
+      <h1 className="header__title">{activeFolder}</h1>
+    </div>
+  );
+};
+
+export default Header;

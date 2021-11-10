@@ -1,7 +1,11 @@
 import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getTodos, deleteTodo } from "../../store/slices/todoSlice";
+import {
+  getTodos,
+  deleteTodo,
+  changeStateTodo,
+} from "../../store/slices/todoSlice";
 import { useLocation } from "react-router";
 
 import Todo from "./todo";
@@ -21,10 +25,23 @@ const TodoList = () => {
     dispatch(deleteTodo(id));
   };
 
+  const changeState = (id, completed) => {
+    const params = {
+      id: id,
+      completed: completed,
+    };
+    dispatch(changeStateTodo(params));
+  };
+
   return (
     <div className="todos">
       {todos.map((todo) => (
-        <Todo key={todo.id} {...todo} removeTodo={removeTodo} />
+        <Todo
+          key={todo.id}
+          {...todo}
+          removeTodo={removeTodo}
+          changeState={changeState}
+        />
       ))}
     </div>
   );
