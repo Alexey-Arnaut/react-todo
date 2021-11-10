@@ -1,5 +1,8 @@
 import React from "react";
 
+import { useDispatch } from "react-redux";
+import { addNewFolder } from "../../store/slices/folderSlice";
+
 import HeaderLogo from "../header/headerLogo";
 import FolderList from "../folderList";
 import Input from "../ui/input";
@@ -7,7 +10,17 @@ import Input from "../ui/input";
 import "./navigation.scss";
 
 const Navigation = () => {
+  const dispatch = useDispatch();
   const [value, setValue] = React.useState("");
+
+  const addFolder = (e) => {
+    e.preventDefault();
+
+    if (value.trim("").length > 0) {
+      dispatch(addNewFolder(value.replace(/ +/g, " ").trim()));
+      setValue("");
+    }
+  };
 
   return (
     <aside className="aside">
@@ -18,6 +31,7 @@ const Navigation = () => {
         name="Введите название папки"
         value={value}
         setValue={setValue}
+        onSubmit={addFolder}
       />
     </aside>
   );

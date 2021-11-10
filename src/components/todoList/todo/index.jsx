@@ -2,7 +2,7 @@ import Checkbox from "../../ui/checkbox";
 
 import "../todos.scss";
 
-const Todo = ({ title, completed }) => {
+const Todo = ({ title, completed, id, removeTodo }) => {
   return (
     <div className="todo">
       <Checkbox completed={completed} />
@@ -22,7 +22,7 @@ const Todo = ({ title, completed }) => {
             />
           </svg>
         </button>
-        <button className="todo__button">
+        <button className="todo__button" onClick={() => removeTodo(id)}>
           <svg
             width="25"
             height="30"

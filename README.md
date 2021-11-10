@@ -1,1 +1,1 @@
-# [React weather](https://alexey-arnaut.github.io/react-todo/)
+# [React todo](https://alexey-arnaut.github.io/react-todo/)
