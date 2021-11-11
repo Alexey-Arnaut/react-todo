@@ -3,6 +3,7 @@
     background-color: var(--secondary-bg-color);
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 0 20px;
 }
 
@@ -18,5 +19,15 @@
     p {
         margin-left: 10px;
         font-size: var(--font-size-lg);
+    }
+}
+
+.header__button {
+
+    &:hover {
+
+        path {
+            fill: var(--primary-svg-color);
+        }
     }
 }

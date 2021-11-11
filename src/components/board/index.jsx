@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addNewTodo } from "../../store/slices/todoSlice";
 import { useLocation } from "react-router";
 
@@ -12,6 +12,7 @@ import "./board.scss";
 
 const Board = () => {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
   const { pathname } = useLocation();
   const [value, setValue] = React.useState("");
 
@@ -22,6 +23,7 @@ const Board = () => {
       const params = {
         title: value.replace(/ +/g, " ").trim(),
         folderId: pathname.slice(1),
+        userId: user,
       };
 
       dispatch(addNewTodo(params));

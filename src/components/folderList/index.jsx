@@ -12,12 +12,13 @@ import "./folders.scss";
 const FolderList = () => {
   const dispatch = useDispatch();
   const folders = useSelector((state) => state.folders.folders);
+  const user = useSelector((state) => state.user.user);
   const { push } = useHistory();
   const { pathname } = useLocation();
 
   React.useEffect(() => {
-    dispatch(getFolders());
-  }, [dispatch]);
+    dispatch(getFolders(user));
+  }, [dispatch, user]);
 
   const activeTodos = (id) => {
     dispatch(getTodos(id));

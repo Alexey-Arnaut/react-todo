@@ -20,12 +20,18 @@ const TodoList = () => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const todos = useSelector((state) => state.todos.todos);
+  const user = useSelector((state) => state.user.user);
   const [active, setActive] = React.useState(false);
   const [todoId, setTodoId] = React.useState("");
   const [title, setTitle] = React.useState("");
 
   React.useEffect(() => {
-    dispatch(getTodos(pathname.slice(1)));
+    const params = {
+      folderId: pathname.slice(1),
+      userId: user,
+    };
+
+    dispatch(getTodos(params));
   }, [dispatch, pathname]);
 
   const remove = (id) => {

@@ -1,0 +1,10 @@
+.button {
+    padding: 10px 40px;
+    border: 2px solid var(--primary-border-color);
+    font-size: var(--font-size-md);
+    border-radius: var(--primary-border-radius);
+
+    &:hover {
+        border-color: var(--tertiary-border-color);
+    }
+}

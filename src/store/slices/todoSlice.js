@@ -11,26 +11,34 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
-export const getTodos = createAsyncThunk("todos/getTodos", async (folderId) => {
-  const querySnapshot = await getDocs(
-    query(collection(db, "todos"), where("folderId", "==", folderId))
-  );
+export const getTodos = createAsyncThunk(
+  "todos/getTodos",
+  async ({ folderId, userId }) => {
+    const querySnapshot = await getDocs(
+      query(
+        collection(db, "todos"),
+        where("folderId", "==", folderId),
+        where("userId", "==", userId)
+      )
+    );
 
-  const data = [];
+    const data = [];
 
-  querySnapshot.forEach((doc) => {
-    data.push({ id: doc.id, ...doc.data() });
-  });
+    querySnapshot.forEach((doc) => {
+      data.push({ id: doc.id, ...doc.data() });
+    });
 
-  return data;
-});
+    return data;
+  }
+);
 
 export const addNewTodo = createAsyncThunk(
   "todos/addNewTodo",
-  async ({ title, folderId }, { dispatch }) => {
+  async ({ title, folderId, userId }, { dispatch }) => {
     const docRef = await addDoc(collection(db, "todos"), {
       title: title,
       folderId: folderId,
+      userId: userId,
       completed: false,
     });
 

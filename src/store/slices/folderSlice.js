@@ -1,24 +1,30 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { db } from "../../firebase";
-import { collection, getDocs, query, addDoc } from "firebase/firestore";
+import { collection, getDocs, query, addDoc, where } from "firebase/firestore";
 
-export const getFolders = createAsyncThunk("folders/getFolders", async () => {
-  const querySnapshot = await getDocs(query(collection(db, "folders")));
+export const getFolders = createAsyncThunk(
+  "folders/getFolders",
+  async (userId) => {
+    const querySnapshot = await getDocs(
+      query(collection(db, "folders"), where("userId", "==", userId))
+    );
 
-  const data = [];
+    const data = [];
 
-  querySnapshot.forEach((doc) => {
-    data.push({ id: doc.id, ...doc.data() });
-  });
+    querySnapshot.forEach((doc) => {
+      data.push({ id: doc.id, ...doc.data() });
+    });
 
-  return data;
-});
+    return data;
+  }
+);
 
 export const addNewFolder = createAsyncThunk(
   "folders/addNewFolder",
-  async (title, { dispatch }) => {
+  async ({ title, userId }, { dispatch }) => {
     const docRef = await addDoc(collection(db, "folders"), {
       title: title,
+      userId: userId,
     });
 
     dispatch(folders({ title: title, id: docRef.id }));

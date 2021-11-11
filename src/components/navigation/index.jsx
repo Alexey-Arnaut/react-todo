@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addNewFolder } from "../../store/slices/folderSlice";
 
 import HeaderLogo from "../header/headerLogo";
@@ -11,13 +11,19 @@ import "./navigation.scss";
 
 const Navigation = () => {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
   const [value, setValue] = React.useState("");
 
   const addFolder = (e) => {
     e.preventDefault();
 
     if (value.trim("").length > 0) {
-      dispatch(addNewFolder(value.replace(/ +/g, " ").trim()));
+      const params = {
+        title: value.replace(/ +/g, " ").trim(),
+        userId: user,
+      };
+
+      dispatch(addNewFolder(params));
       setValue("");
     }
   };
