@@ -11,7 +11,6 @@ import { useLocation } from "react-router";
 
 import Todo from "./todo";
 import Modal from "../ui/modal";
-import HeaderLogo from "../header/headerLogo";
 import Input from "../ui/input";
 
 import "./todos.scss";
@@ -75,7 +74,6 @@ const TodoList = () => {
         />
       ))}
       <Modal active={active} setActive={setActive}>
-        <HeaderLogo />
         <form className="todos__form" onSubmit={changeName}>
           <Input name="Редактировть задачу" value={title} setValue={setTitle} />
         </form>

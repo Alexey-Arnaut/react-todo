@@ -54,6 +54,7 @@ export const deleteTodo = createAsyncThunk(
     dispatch(remove(id));
   }
 );
+
 export const changeStateTodo = createAsyncThunk(
   "todos/changeStateTodo",
 

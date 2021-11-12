@@ -14,7 +14,7 @@
     padding: 15px 10px;
     border-radius: var(--primary-border-radius);
     opacity: 0;
-    animation: show 0.5s forwards;
+    animation: show-todos 0.5s forwards;
 
     &:first-child {
         margin-top: 0;
@@ -41,7 +41,7 @@
     margin-top: 20px;
 }
 
-@keyframes show {
+@keyframes show-todos {
     100% {
         opacity: 1;
     }

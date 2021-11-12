@@ -1,6 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { db } from "../../firebase";
-import { collection, getDocs, query, addDoc, where } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  addDoc,
+  where,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 
 export const getFolders = createAsyncThunk(
   "folders/getFolders",
@@ -31,6 +39,16 @@ export const addNewFolder = createAsyncThunk(
   }
 );
 
+export const deleteFolder = createAsyncThunk(
+  "folders/deleteFolder",
+  async (folderId, { dispatch }) => {
+    console.log(folderId);
+    await deleteDoc(doc(db, "folders", folderId));
+
+    dispatch(remove(folderId));
+  }
+);
+
 const folderSlice = createSlice({
   name: "folders",
   initialState: {
@@ -40,6 +58,11 @@ const folderSlice = createSlice({
   reducers: {
     folders(state, action) {
       state.folders.push(action.payload);
+    },
+    remove(state, action) {
+      state.folders = state.folders.filter(
+        (folder) => folder.id !== action.payload
+      );
     },
   },
   extraReducers: {
@@ -53,5 +76,5 @@ const folderSlice = createSlice({
   },
 });
 
-const { folders } = folderSlice.actions;
+const { folders, remove } = folderSlice.actions;
 export default folderSlice.reducer;

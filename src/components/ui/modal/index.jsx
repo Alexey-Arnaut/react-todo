@@ -1,3 +1,5 @@
+import HeaderLogo from "../../header/headerLogo";
+
 import "./modal.scss";
 
 const Modal = ({ children, active, setActive }) => {
@@ -8,6 +10,7 @@ const Modal = ({ children, active, setActive }) => {
           className="modal__close"
           onClick={() => setActive(false)}
         ></button>
+        <HeaderLogo />
         {children}
       </div>
     </div>
