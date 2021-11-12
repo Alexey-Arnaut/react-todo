@@ -1,0 +1,24 @@
+.message {
+    position: absolute;
+    top: 20px;
+    background-color: var(--danger-bg-color);
+    padding: 15px 20px;
+    border-radius: var(--primary-border-radius);
+    perspective: 400px;
+    opacity: 0;
+    transform-style: preserve-3d;
+    transform: translateY(-50px);
+    animation: show-message 1s forwards;
+    transition: 0.5s;
+}
+
+.message--succes {
+    background-color: var(--succes-bg-color);
+}
+
+@keyframes show-message {
+    100% {
+        transform: none;
+        opacity: 1;
+    }
+}

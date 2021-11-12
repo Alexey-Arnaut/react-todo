@@ -5,7 +5,8 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "../../store/slices/authSlice";
 import { useHistory } from "react-router";
 
-import Form from "../../components/form";
+import FormAuthLogin from "../../components/formAuth/formAuthLogin";
+import FormAuthMessage from "../../components/formAuth/formAuthMessage";
 
 import "./login.scss";
 
@@ -14,19 +15,27 @@ const Login = () => {
   const [password, setPassword] = React.useState("");
   const dispatch = useDispatch();
   const { push } = useHistory();
+  const [message, setMessage] = React.useState("");
 
-  const login = () => {
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {
-        dispatch(loginUser(user.uid));
+  const login = async () => {
+    if (email.trim().length > 0 && password.trim().length > 0) {
+      const auth = getAuth();
+      await signInWithEmailAndPassword(auth, email, password)
+        .then(({ user }) => {
+          dispatch(loginUser(user.uid));
 
-        localStorage.setItem("user", JSON.stringify({ email, password }));
-        push("/react-todo/");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+          localStorage.setItem("user", JSON.stringify({ email, password }));
+          push("/react-todo/");
+        })
+        .catch((err) => {
+          setMessage(err.code);
+          console.log(err.code);
+        });
+    } else if (email.trim().length > 0) {
+      setMessage("empty-field-email");
+    } else if (password.trim().length > 0) {
+      setMessage("empty-field-password");
+    }
   };
 
   React.useEffect(() => {
@@ -44,7 +53,8 @@ const Login = () => {
 
   return (
     <div className="login">
-      <Form
+      <FormAuthMessage message={message} setMessage={setMessage} />
+      <FormAuthLogin
         title="Войти в аккаунт"
         btnName="Войти"
         link="/react-todo/registr"

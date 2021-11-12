@@ -32,7 +32,7 @@ const TodoList = () => {
     };
 
     dispatch(getTodos(params));
-  }, [dispatch, pathname]);
+  }, [dispatch, pathname, user]);
 
   const remove = (id) => {
     dispatch(deleteTodo(id));
@@ -76,13 +76,9 @@ const TodoList = () => {
       ))}
       <Modal active={active} setActive={setActive}>
         <HeaderLogo />
-        <Input
-          className="todos__modal"
-          name="Редактировть задачу"
-          value={title}
-          setValue={setTitle}
-          onSubmit={changeName}
-        />
+        <form className="todos__form" onSubmit={changeName}>
+          <Input name="Редактировть задачу" value={title} setValue={setTitle} />
+        </form>
       </Modal>
     </div>
   );

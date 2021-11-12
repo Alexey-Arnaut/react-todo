@@ -36,12 +36,14 @@ const Board = () => {
     <div className="board">
       <Header />
       <TodoList />
-      <Input
-        name="Введите название задач"
-        value={value}
-        setValue={setValue}
-        onSubmit={addTodo}
-      />
+      <form className="board__form" onSubmit={addTodo}>
+        <Input
+          name="Введите название задач"
+          value={value}
+          setValue={setValue}
+          type="text"
+        />
+      </form>
     </div>
   );
 };

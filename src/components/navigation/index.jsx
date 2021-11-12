@@ -32,13 +32,14 @@ const Navigation = () => {
     <aside className="aside">
       <HeaderLogo />
       <FolderList />
-      <Input
-        className="aside__field"
-        name="Введите название папки"
-        value={value}
-        setValue={setValue}
-        onSubmit={addFolder}
-      />
+      <form className="aside__form" onSubmit={addFolder}>
+        <Input
+          name="Введите название папки"
+          value={value}
+          setValue={setValue}
+          type="text"
+        />
+      </form>
     </aside>
   );
 };

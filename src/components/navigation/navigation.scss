@@ -5,9 +5,10 @@
     min-width: 320px;
     background-color: var(--secondary-bg-color);
     padding: 20px 10px 10px;
+    position: relative;
 }
 
-.aside__field {
+.aside__form {
 
     .form__field {
         border-color: var(--primary-border-color);
