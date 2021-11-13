@@ -8,6 +8,7 @@ import {
   where,
   deleteDoc,
   doc,
+  updateDoc,
 } from "firebase/firestore";
 
 export const getFolders = createAsyncThunk(
@@ -49,6 +50,17 @@ export const deleteFolder = createAsyncThunk(
   }
 );
 
+export const changeNameFolder = createAsyncThunk(
+  "todos/changeNameFolder",
+  async ({ title, id }, { dispatch }) => {
+    dispatch(changeName({ title, id }));
+
+    await updateDoc(doc(db, "folders", id), {
+      title: title,
+    });
+  }
+);
+
 const folderSlice = createSlice({
   name: "folders",
   initialState: {
@@ -64,6 +76,10 @@ const folderSlice = createSlice({
         (folder) => folder.id !== action.payload
       );
     },
+    changeName(state, action) {
+      state.folders.find((folder) => folder.id === action.payload.id).title =
+        action.payload.title;
+    },
   },
   extraReducers: {
     [getFolders.pending]: (state) => {
@@ -76,5 +92,5 @@ const folderSlice = createSlice({
   },
 });
 
-const { folders, remove } = folderSlice.actions;
+const { folders, remove, changeName } = folderSlice.actions;
 export default folderSlice.reducer;

@@ -7,7 +7,8 @@ const Folder = ({
   link,
   active,
   activeTodos,
-  openModal,
+  openModalRemove,
+  openModalEdit,
 }) => {
   return (
     <div
@@ -20,7 +21,10 @@ const Folder = ({
       <h2 className="folder__title">{title}</h2>
       {link !== "/react-todo/" && active && (
         <div className="folder__buttons">
-          <button className="folder__button">
+          <button
+            className="folder__button"
+            onClick={() => openModalEdit(id, title)}
+          >
             <svg
               width="25"
               height="25"
@@ -34,7 +38,10 @@ const Folder = ({
               />
             </svg>
           </button>
-          <button className="folder__button" onClick={() => openModal(id)}>
+          <button
+            className="folder__button"
+            onClick={() => openModalRemove(id)}
+          >
             <svg
               width="25"
               height="30"

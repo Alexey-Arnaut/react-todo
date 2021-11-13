@@ -6,6 +6,8 @@
     background-color: var(--secondary-bg-color);
     padding: 20px 10px 10px;
     position: relative;
+    z-index: 9;
+    transition: 0.5s;
 }
 
 .aside__form {
@@ -16,5 +18,53 @@
 
     .form__label {
         background-color: var(--secondary-bg-color);
+    }
+}
+
+.aside__button {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: var(--secondary-bg-color);
+    right: -20px;
+    top: 50%;
+    margin-top: -20px;
+    border-radius: var(--secondary-border-radius);
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+        width: 15px;
+    }
+
+    &:hover {
+
+        path {
+            fill: var(--primary-svg-color);
+        }
+    }
+}
+
+@media (max-width: 768px) {
+
+    .aside {
+        position: fixed;
+        left: -310px;
+    }
+
+    .aside__button {
+        display: flex;
+    }
+}
+
+.aside--active {
+    left: 0;
+
+    .aside__button {
+
+        svg {
+            transform: rotate(180deg);
+        }
     }
 }

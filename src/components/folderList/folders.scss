@@ -98,8 +98,29 @@
     }
 }
 
+.folders__form {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.folders__form-button {
+    border-color: var(--secondary-border-color);
+}
+
 @keyframes show-folders {
     100% {
         opacity: 1;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .folders__form {
+        flex-direction: column;
+    }
+
+    .folders__form-button {
+        margin-top: 15px;
     }
 }

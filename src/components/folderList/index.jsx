@@ -1,13 +1,17 @@
 import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getFolders, deleteFolder } from "../../store/slices/folderSlice";
+import {
+  getFolders,
+  deleteFolder,
+  changeNameFolder,
+} from "../../store/slices/folderSlice";
 import { getTodos } from "../../store/slices/todoSlice";
 import { useHistory, useLocation } from "react-router";
 
 import Folder from "./folder";
-import Modal from "../ui/modal";
-import Button from "../ui/button";
+import FolderEdit from "./FolderEdit";
+import FolderRemove from "./FolderRemove";
 
 import "./folders.scss";
 
@@ -15,10 +19,12 @@ const FolderList = () => {
   const dispatch = useDispatch();
   const folders = useSelector((state) => state.folders.folders);
   const user = useSelector((state) => state.user.user);
-  const [active, setActive] = React.useState(false);
-  const [folderId, setFolderId] = React.useState("");
   const { push } = useHistory();
   const { pathname } = useLocation();
+  const [activeModalRemove, setActiveModalRemove] = React.useState(false);
+  const [activeModalEdit, setActiveModalEdit] = React.useState(false);
+  const [folderId, setFolderId] = React.useState("");
+  const [value, setValue] = React.useState("");
 
   React.useEffect(() => {
     dispatch(getFolders(user));
@@ -28,15 +34,33 @@ const FolderList = () => {
     dispatch(getTodos(id));
   };
 
-  const openModal = (id) => {
-    setActive(true);
+  const openModalRemove = (id) => {
+    setActiveModalRemove(true);
+    setFolderId(id);
+  };
+
+  const openModalEdit = (id, title) => {
+    setActiveModalEdit(true);
+    setValue(title);
     setFolderId(id);
   };
 
   const removeFolder = () => {
     dispatch(deleteFolder(folderId));
-    setActive(false);
+    setActiveModalRemove(false);
     push("/react-todo/");
+  };
+
+  const changeName = (e) => {
+    e.preventDefault();
+
+    if (value.trim("").length > 0) {
+      const params = {
+        title: value.replace(/ +/g, " ").trim(),
+        id: folderId,
+      };
+      dispatch(changeNameFolder(params));
+    }
   };
 
   return (
@@ -60,22 +84,24 @@ const FolderList = () => {
           push={push}
           active={pathname === `/${folder.id}` ? true : false}
           activeTodos={activeTodos}
-          openModal={openModal}
+          openModalRemove={openModalRemove}
+          openModalEdit={openModalEdit}
         />
       ))}
-      <Modal active={active} setActive={setActive}>
-        <h2 className="folders__title">
-          Вы действительно хотите удалить папку и все задачи связанные с ней?
-        </h2>
-        <div className="folders__buttons">
-          <Button onClick={removeFolder} className="folders__button">
-            Да
-          </Button>
-          <Button onClick={() => setActive(false)} className="folders__button">
-            Нет
-          </Button>
-        </div>
-      </Modal>
+      <FolderEdit
+        active={activeModalEdit}
+        setActive={setActiveModalEdit}
+        value={value}
+        setValue={setValue}
+        onSubmit={changeName}
+        onClick={changeName}
+      />
+      <FolderRemove
+        active={activeModalRemove}
+        setActive={setActiveModalRemove}
+        removeFolder={removeFolder}
+        setActiveModalRemove={setActiveModalRemove}
+      />
     </div>
   );
 };

@@ -70,7 +70,7 @@ export const changeStateTodo = createAsyncThunk(
 export const changeNameTodo = createAsyncThunk(
   "todos/changeNameTodo",
   async ({ title, id }, { dispatch }) => {
-    dispatch(changeName({ id, title }));
+    dispatch(changeName({ title, id }));
 
     await updateDoc(doc(db, "todos", id), {
       title: title,
