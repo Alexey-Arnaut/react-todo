@@ -4,7 +4,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(#000000, 50%);
+    background-color: rgba(#000000, 0.5);
     z-index: 99;
     display: flex;
     align-items: center;
@@ -32,6 +32,8 @@
     border-radius: var(--secondary-border-radius);
     position: relative;
     transform: translateY(-100px);
+    max-height: 100%;
+    overflow-y: auto;
     transition: 0.5s;
 }
 

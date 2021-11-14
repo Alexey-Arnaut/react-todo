@@ -78,6 +78,17 @@ export const changeNameTodo = createAsyncThunk(
   }
 );
 
+export const setDescription = createAsyncThunk(
+  "todos/setDescription",
+  async ({ description, id }, { dispatch }) => {
+    dispatch(addDescription({ description, id }));
+
+    await updateDoc(doc(db, "todos", id), {
+      description: description,
+    });
+  }
+);
+
 const todosSlice = createSlice({
   name: "todos",
   initialState: {
@@ -99,6 +110,10 @@ const todosSlice = createSlice({
       state.todos.find((todo) => todo.id === action.payload.id).title =
         action.payload.title;
     },
+    addDescription(state, action) {
+      state.todos.find((todo) => todo.id === action.payload.id).description =
+        action.payload.description;
+    },
   },
   extraReducers: {
     [getTodos.pending]: (state) => {
@@ -111,5 +126,6 @@ const todosSlice = createSlice({
   },
 });
 
-const { todos, remove, changeState, changeName } = todosSlice.actions;
+const { todos, remove, changeState, changeName, addDescription } =
+  todosSlice.actions;
 export default todosSlice.reducer;

@@ -6,6 +6,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Comfortaa', cursive;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
     &::-webkit-scrollbar {
         width: 0;
@@ -19,7 +20,8 @@ body {
 }
 
 button,
-input {
+input,
+textarea {
     background: none;
     border: none;
     outline: none;
@@ -31,6 +33,10 @@ input {
 input::placeholder {
     color: var(--primary-text-color);
     font-size: var(--font-size-sm);
+}
+
+textarea {
+    resize: none;
 }
 
 svg,

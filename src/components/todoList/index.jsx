@@ -6,13 +6,14 @@ import {
   deleteTodo,
   changeStateTodo,
   changeNameTodo,
+  setDescription,
 } from "../../store/slices/todoSlice";
 import { useLocation } from "react-router";
 
 import Todo from "./todo";
-import Modal from "../ui/modal";
-import Input from "../ui/input";
+import TodoEdit from "./TodoEdit";
 
+import img from "../../img/img.webp";
 import "./todos.scss";
 
 const TodoList = () => {
@@ -23,6 +24,7 @@ const TodoList = () => {
   const [active, setActive] = React.useState(false);
   const [todoId, setTodoId] = React.useState("");
   const [title, setTitle] = React.useState("");
+  const [desc, setDesc] = React.useState("");
 
   React.useEffect(() => {
     const params = {
@@ -49,36 +51,60 @@ const TodoList = () => {
     setActive(true);
     setTitle(title);
     setTodoId(id);
+
+    setDesc(todos.find((todo) => todo.id === id).description || "");
   };
 
-  const changeName = (e) => {
-    e.preventDefault();
+  const changeName = () => {
+    if (title.trim("").length > 0) {
+      const params = {
+        title: title,
+        id: todoId,
+      };
 
+      dispatch(changeNameTodo(params));
+    }
+  };
+
+  const addDescription = () => {
     const params = {
-      title: title,
+      description: desc,
       id: todoId,
     };
 
-    dispatch(changeNameTodo(params));
+    dispatch(setDescription(params));
   };
 
   return (
-    <div className="todos">
-      {todos.map((todo) => (
-        <Todo
-          key={todo.id}
-          {...todo}
-          remove={remove}
-          changeState={changeState}
-          openModal={openModal}
-        />
-      ))}
-      <Modal active={active} setActive={setActive}>
-        <form className="todos__form" onSubmit={changeName}>
-          <Input name="Редактировть задачу" value={title} setValue={setTitle} />
-        </form>
-      </Modal>
-    </div>
+    <>
+      <div className={`todos ${todos.length === 0 ? "todos--active" : ""}`}>
+        {todos.length === 0 && (
+          <>
+            <img src={img} alt="" />
+            <h1 className="todos__title">Тут пока ничего нет.</h1>
+          </>
+        )}
+        {todos.map((todo) => (
+          <Todo
+            key={todo.id}
+            {...todo}
+            remove={remove}
+            changeState={changeState}
+            openModal={openModal}
+          />
+        ))}
+      </div>
+      <TodoEdit
+        active={active}
+        setActive={setActive}
+        changeName={changeName}
+        title={title}
+        setTitle={setTitle}
+        desc={desc}
+        setDesc={setDesc}
+        addDescription={addDescription}
+      />
+    </>
   );
 };
 

@@ -8,3 +8,10 @@
         border-color: var(--tertiary-border-color);
     }
 }
+
+@media (max-width: 600px) {
+    
+    .button {
+        font-size: var(--font-size-sm);
+    }
+}

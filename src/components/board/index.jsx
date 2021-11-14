@@ -7,6 +7,7 @@ import { useLocation } from "react-router";
 import Header from "../header";
 import TodoList from "../todoList";
 import Input from "../ui/input";
+import Button from "../ui/button";
 
 import "./board.scss";
 
@@ -38,11 +39,12 @@ const Board = () => {
       <TodoList />
       <form className="board__form" onSubmit={addTodo}>
         <Input
-          name="Введите название задач"
+          name="Введите название задачи"
           value={value}
           setValue={setValue}
           type="text"
         />
+        <Button className="board__form-button">Добавить</Button>
       </form>
     </div>
   );

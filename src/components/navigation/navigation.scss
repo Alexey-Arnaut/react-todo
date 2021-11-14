@@ -1,70 +1,70 @@
 .aside {
+    position: absolute;
+    left: -310px;
     height: 100vh;
     display: flex;
     flex-direction: column;
     min-width: 320px;
     background-color: var(--secondary-bg-color);
     padding: 20px 10px 10px;
-    position: relative;
     z-index: 9;
     transition: 0.5s;
-}
-
-.aside__form {
-
-    .form__field {
-        border-color: var(--primary-border-color);
-    }
-
-    .form__label {
-        background-color: var(--secondary-bg-color);
-    }
-}
-
-.aside__button {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    background-color: var(--secondary-bg-color);
-    right: -20px;
-    top: 50%;
-    margin-top: -20px;
-    border-radius: var(--secondary-border-radius);
-    display: none;
-    align-items: center;
-    justify-content: center;
-
-    svg {
-        width: 15px;
-    }
-
-    &:hover {
-
-        path {
-            fill: var(--primary-svg-color);
-        }
-    }
-}
-
-@media (max-width: 768px) {
-
-    .aside {
-        position: fixed;
-        left: -310px;
-    }
-
-    .aside__button {
-        display: flex;
-    }
 }
 
 .aside--active {
     left: 0;
 
     .aside__button {
+        right: 0;
 
         svg {
             transform: rotate(180deg);
+        }
+    }
+}
+
+.aside__form {
+
+    .input {
+        border-color: var(--primary-border-color);
+
+        &:hover {
+            border-color: var(--tertiary-border-color);
+        }
+
+        &:focus {
+            border-color: var(--tertiary-border-color);
+        }
+    }
+
+    .input__label {
+        background-color: var(--secondary-bg-color);
+    }
+}
+
+.aside__button {
+    background-color: var(--primary-bg-color);
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    right: -20px;
+    border-radius: var(--primary-border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+        width: 15px;
+
+        path {
+            fill: var(--secondary-svg-color);
+        }
+    }
+
+    &:hover {
+
+        path {
+            fill: var(--primary-svg-color);
         }
     }
 }
