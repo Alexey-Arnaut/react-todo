@@ -1,6 +1,6 @@
-import Checkbox from "../../ui/checkbox";
+import Checkbox from "../ui/checkbox";
 
-import "../todos.scss";
+import "./todos.scss";
 
 const Todo = ({ title, completed, id, remove, changeState, openModal }) => {
   return (

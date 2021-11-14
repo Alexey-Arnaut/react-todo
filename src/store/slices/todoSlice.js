@@ -47,7 +47,7 @@ export const addNewTodo = createAsyncThunk(
 );
 
 export const deleteTodo = createAsyncThunk(
-  "todos/removeTodo",
+  "todos/deleteTodo",
   async (id, { dispatch }) => {
     await deleteDoc(doc(db, "todos", id));
 

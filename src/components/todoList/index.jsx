@@ -8,10 +8,18 @@ import {
   changeNameTodo,
   setDescription,
 } from "../../store/slices/todoSlice";
+import {
+  getSubtasks,
+  addNewSubtask,
+  deleteSubtask,
+  changeStateSubtask,
+  changeNameSubtask,
+} from "../../store/slices/subtaskSlice";
 import { useLocation } from "react-router";
 
-import Todo from "./todo";
-import TodoEdit from "./TodoEdit";
+import Todo from "./Todo";
+import TodoModal from "./TodoModal";
+import TodoEditSubtask from "./TodoEditSubtask";
 
 import img from "../../img/img.webp";
 import "./todos.scss";
@@ -21,10 +29,15 @@ const TodoList = () => {
   const { pathname } = useLocation();
   const todos = useSelector((state) => state.todos.todos);
   const user = useSelector((state) => state.user.user);
+  const subtasks = useSelector((state) => state.subtasks.subtasks);
   const [active, setActive] = React.useState(false);
+  const [activeModalSubtask, setActiveModalSubtask] = React.useState(false);
   const [todoId, setTodoId] = React.useState("");
-  const [title, setTitle] = React.useState("");
+  const [todoTitle, setTodoTitle] = React.useState("");
   const [desc, setDesc] = React.useState("");
+  const [subtaskTitle, setSubtaskTitle] = React.useState("");
+  const [value, setValue] = React.useState("");
+  const [subtaskId, setSubtaskId] = React.useState("");
 
   React.useEffect(() => {
     const params = {
@@ -35,11 +48,11 @@ const TodoList = () => {
     dispatch(getTodos(params));
   }, [dispatch, pathname, user]);
 
-  const remove = (id) => {
+  const removeTodo = (id) => {
     dispatch(deleteTodo(id));
   };
 
-  const changeState = (id, completed) => {
+  const changeStateTodos = (id, completed) => {
     const params = {
       id: id,
       completed: completed,
@@ -47,18 +60,24 @@ const TodoList = () => {
     dispatch(changeStateTodo(params));
   };
 
-  const openModal = (title, id) => {
-    setActive(true);
-    setTitle(title);
-    setTodoId(id);
+  const openModalTodo = (title, id) => {
+    const params = {
+      todoId: id,
+      userId: user,
+    };
 
+    setActive(true);
+    setTodoTitle(title);
+    setTodoId(id);
     setDesc(todos.find((todo) => todo.id === id).description || "");
+
+    dispatch(getSubtasks(params));
   };
 
-  const changeName = () => {
-    if (title.trim("").length > 0) {
+  const changeNameTodos = () => {
+    if (todoTitle.trim("").length > 0) {
       const params = {
-        title: title,
+        title: todoTitle,
         id: todoId,
       };
 
@@ -75,6 +94,49 @@ const TodoList = () => {
     dispatch(setDescription(params));
   };
 
+  const addSubtask = () => {
+    if (subtaskTitle.trim("").length > 0) {
+      const params = {
+        title: subtaskTitle.replace(/ +/g, " ").trim(),
+        todoId: todoId,
+        userId: user,
+      };
+
+      dispatch(addNewSubtask(params));
+
+      setSubtaskTitle("");
+    }
+  };
+
+  const removeSubtask = (id) => {
+    dispatch(deleteSubtask(id));
+  };
+
+  const changeStateSubtasks = (id, completed) => {
+    const params = {
+      id: id,
+      completed: completed,
+    };
+    dispatch(changeStateSubtask(params));
+  };
+
+  const openModalSubtask = (title, id) => {
+    setActiveModalSubtask(true);
+    setValue(title);
+    setSubtaskId(id);
+  };
+
+  const changeNameSubtasks = () => {
+    if (value.trim("").length > 0) {
+      const params = {
+        title: value,
+        id: subtaskId,
+      };
+
+      dispatch(changeNameSubtask(params));
+    }
+  };
+
   return (
     <>
       <div className={`todos ${todos.length === 0 ? "todos--active" : ""}`}>
@@ -88,21 +150,35 @@ const TodoList = () => {
           <Todo
             key={todo.id}
             {...todo}
-            remove={remove}
-            changeState={changeState}
-            openModal={openModal}
+            remove={removeTodo}
+            changeState={changeStateTodos}
+            openModal={openModalTodo}
           />
         ))}
       </div>
-      <TodoEdit
+      <TodoModal
         active={active}
         setActive={setActive}
-        changeName={changeName}
-        title={title}
-        setTitle={setTitle}
+        changeName={changeNameTodos}
+        todoTitle={todoTitle}
+        setTodoTitle={setTodoTitle}
         desc={desc}
         setDesc={setDesc}
         addDescription={addDescription}
+        subtasksTitle={subtaskTitle}
+        setSubtaskTitle={setSubtaskTitle}
+        subtasks={subtasks}
+        addSubtask={addSubtask}
+        remove={removeSubtask}
+        changeState={changeStateSubtasks}
+        openModal={openModalSubtask}
+      />
+      <TodoEditSubtask
+        active={activeModalSubtask}
+        setActive={setActiveModalSubtask}
+        value={value}
+        setValue={setValue}
+        changeNameSubtasks={changeNameSubtasks}
       />
     </>
   );
