@@ -6,6 +6,7 @@ import { addNewFolder } from "../../store/slices/folderSlice";
 import HeaderLogo from "../header/headerLogo";
 import FolderList from "../folderList";
 import Input from "../ui/input";
+import Message from "../message";
 
 import "./navigation.scss";
 
@@ -14,6 +15,7 @@ const Navigation = () => {
   const user = useSelector((state) => state.user.user);
   const [value, setValue] = React.useState("");
   const [active, setActive] = React.useState(false);
+  const [message, setMessage] = React.useState("");
 
   const addFolder = (e) => {
     e.preventDefault();
@@ -26,11 +28,14 @@ const Navigation = () => {
 
       dispatch(addNewFolder(params));
       setValue("");
+    } else {
+      setMessage("empty-field");
     }
   };
 
   return (
     <aside className={`aside ${active ? "aside--active" : ""}`}>
+      <Message message={message} setMessage={setMessage} />
       <HeaderLogo />
       <FolderList />
       <form className="aside__form" onSubmit={addFolder}>

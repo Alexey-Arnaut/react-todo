@@ -1,0 +1,32 @@
+.not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+
+    img {
+        max-width: 100%;
+        width: 600px;
+    }
+}
+
+.not-found__title {
+    margin: 20px 0;
+    font-size: var(--font-size-xl);
+}
+
+.not-found__link {
+    font-size: var(--font-size-md);
+    color: var(--primary-text-color);
+    padding: 10px 15px;
+    border: 2px solid var(--secondary-border-color);
+    border-radius: var(--primary-border-radius);
+    transition: 0.5s;
+
+    &:hover {
+        background-color: var(--tertiary-bg-color);
+        border-color: transparent;
+    }
+}

@@ -1,4 +1,4 @@
-import "../folders.scss";
+import "./folders.scss";
 
 const Folder = ({
   title,

@@ -6,7 +6,7 @@ import { loginUser } from "../../store/slices/authSlice";
 import { useHistory } from "react-router";
 
 import FormAuthLogin from "../../components/formAuth/formAuthLogin";
-import FormAuthMessage from "../../components/formAuth/formAuthMessage";
+import Message from "../../components/message";
 
 import "./login.scss";
 
@@ -53,7 +53,7 @@ const Login = () => {
 
   return (
     <div className="login">
-      <FormAuthMessage message={message} setMessage={setMessage} />
+      <Message message={message} setMessage={setMessage} />
       <FormAuthLogin
         title="Войти в аккаунт"
         btnName="Войти"

@@ -6,7 +6,7 @@ import { loginUser } from "../../store/slices/authSlice";
 import { useHistory } from "react-router";
 
 import FormAuthRegistr from "../../components/formAuth/formAuthRegistr";
-import FormAuthMessage from "../../components/formAuth/formAuthMessage";
+import Message from "../../components/message";
 
 import "./registr.scss";
 
@@ -44,7 +44,7 @@ const Registr = () => {
 
   return (
     <div className="registr">
-      <FormAuthMessage message={message} setMessage={setMessage} />
+      <Message message={message} setMessage={setMessage} />
       <FormAuthRegistr
         title="Зарегистрироваться"
         btnName="Зарегистрироваться"

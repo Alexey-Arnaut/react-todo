@@ -10,6 +10,10 @@
 .header__title {
     font-size: var(--font-size-xl);
     padding-left: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 10px;
 }
 
 .logo {
@@ -30,5 +34,13 @@
         path {
             fill: var(--primary-svg-color);
         }
+    }
+}
+
+@media (max-width: 600px) {
+
+    .header__title {
+        font-size: var(--font-size-lg);
+        padding-left: 10px;
     }
 }

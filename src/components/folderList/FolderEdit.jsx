@@ -1,5 +1,5 @@
 import Modal from "../ui/modal";
-import Input from "../ui/input";
+import Textarea from "../ui/textarea";
 import Button from "../ui/button";
 
 const FolderEdit = ({
@@ -12,8 +12,8 @@ const FolderEdit = ({
 }) => {
   return (
     <Modal active={active} setActive={setActive}>
-      <form className="folders__form" onSubmit={onSubmit}>
-        <Input
+      <div className="folders__form">
+        <Textarea
           name="Название папки"
           value={value}
           setValue={setValue}
@@ -22,7 +22,7 @@ const FolderEdit = ({
         <Button onClick={onClick} className="folders__form-button">
           Сохранить
         </Button>
-      </form>
+      </div>
     </Modal>
   );
 };

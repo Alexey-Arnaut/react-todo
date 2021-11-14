@@ -8,6 +8,7 @@ import Header from "../header";
 import TodoList from "../todoList";
 import Input from "../ui/input";
 import Button from "../ui/button";
+import Message from "../message";
 
 import "./board.scss";
 
@@ -16,6 +17,7 @@ const Board = () => {
   const user = useSelector((state) => state.user.user);
   const { pathname } = useLocation();
   const [value, setValue] = React.useState("");
+  const [message, setMessage] = React.useState("");
 
   const addTodo = (e) => {
     e.preventDefault();
@@ -30,11 +32,14 @@ const Board = () => {
       dispatch(addNewTodo(params));
 
       setValue("");
+    } else {
+      setMessage("empty-field");
     }
   };
 
   return (
     <div className="board">
+      <Message message={message} setMessage={setMessage} />
       <Header />
       <TodoList />
       <form className="board__form" onSubmit={addTodo}>

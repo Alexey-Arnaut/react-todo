@@ -3,7 +3,7 @@ import React from "react";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
 import FormAuthResetPassword from "../../components/formAuth/formAuthResetPassword";
-import FormAuthMessage from "../../components/formAuth/formAuthMessage";
+import Message from "../../components/message";
 
 import "./reset-password.scss";
 
@@ -29,7 +29,7 @@ const ResetPassword = () => {
 
   return (
     <div className="reset-password">
-      <FormAuthMessage message={message} setMessage={setMessage} />
+      <Message message={message} setMessage={setMessage} />
       <FormAuthResetPassword
         title="Сбросить пароль"
         btnName="Отправить письмо"

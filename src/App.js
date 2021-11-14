@@ -5,6 +5,7 @@ import Login from "./pages/login";
 import Registr from "./pages/registr";
 import ResetPassword from "./pages/resetPassword";
 import Home from "./pages/home";
+import NotFound from "./pages/notFound";
 
 function App() {
   const user = useSelector((state) => state.user.user);
@@ -19,11 +20,12 @@ function App() {
           path="/react-todo/reset-password"
           component={ResetPassword}
         />
-        {user !== null ? (
+        {user !== null || localStorage.getItem("user") ? (
           <Route exact path="/:folderId/" component={Home} />
         ) : (
           <Redirect to="/react-todo/login" />
         )}
+        <Route component={NotFound} />
       </Switch>
     </>
   );

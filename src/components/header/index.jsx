@@ -1,4 +1,4 @@
-import { useLocation } from "react-router";
+import { useLocation, useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { signOutUser } from "../../store/slices/authSlice";
 
@@ -6,6 +6,7 @@ import "./header.scss";
 
 const Header = () => {
   const { pathname } = useLocation();
+  const { push } = useHistory();
   const folders = useSelector((state) => state.folders.folders).find(
     (folder) => folder.id === pathname.slice(1)
   );
@@ -15,6 +16,7 @@ const Header = () => {
     dispatch(signOutUser());
 
     localStorage.removeItem("user");
+    push("/react-todo/login");
   };
 
   const activeFolder =

@@ -7,4 +7,19 @@
 
 .auth__form-title {
     margin-top: 15px;
+    font-size: var(--font-size-xl);
+}
+
+@media (max-width: 600px) {
+
+    .auth__form-title {
+        font-size: var(--font-size-lg);
+    }
+}
+
+@media (max-width: 425px) {
+
+    .auth__form-title {
+        font-size: var(--font-size-md);
+    }
 }

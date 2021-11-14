@@ -1,8 +1,8 @@
 import React from "react";
 
-import "./form-auth-message.scss";
+import "./message.scss";
 
-const FormAuthMessage = ({ message, setMessage }) => {
+const Message = ({ message, setMessage }) => {
   React.useEffect(() => {
     setTimeout(() => {
       setMessage("");
@@ -28,10 +28,11 @@ const FormAuthMessage = ({ message, setMessage }) => {
             <p>Такой пользовтель уже существует</p>
           )}
           {message === "check-email" && <p>Проверьте вашу почту</p>}
+          {message === "empty-field" && <p>Поле пустое</p>}
         </div>
       )}
     </>
   );
 };
 
-export default FormAuthMessage;
+export default Message;

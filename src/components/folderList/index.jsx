@@ -9,9 +9,10 @@ import {
 import { getTodos } from "../../store/slices/todoSlice";
 import { useHistory, useLocation } from "react-router";
 
-import Folder from "./folder";
+import Folder from "./Folder";
 import FolderEdit from "./FolderEdit";
 import FolderRemove from "./FolderRemove";
+import Message from "../message";
 
 import "./folders.scss";
 
@@ -25,6 +26,7 @@ const FolderList = () => {
   const [activeModalEdit, setActiveModalEdit] = React.useState(false);
   const [folderId, setFolderId] = React.useState("");
   const [value, setValue] = React.useState("");
+  const [message, setMessage] = React.useState("");
 
   React.useEffect(() => {
     dispatch(getFolders(user));
@@ -60,6 +62,9 @@ const FolderList = () => {
         id: folderId,
       };
       dispatch(changeNameFolder(params));
+    } else {
+      setMessage("empty-field");
+      setValue(folders.find((folder) => folder.id === folderId).title);
     }
   };
 
@@ -93,7 +98,6 @@ const FolderList = () => {
         setActive={setActiveModalEdit}
         value={value}
         setValue={setValue}
-        onSubmit={changeName}
         onClick={changeName}
       />
       <FolderRemove
@@ -102,6 +106,7 @@ const FolderList = () => {
         removeFolder={removeFolder}
         setActiveModalRemove={setActiveModalRemove}
       />
+      <Message message={message} setMessage={setMessage} />
     </div>
   );
 };

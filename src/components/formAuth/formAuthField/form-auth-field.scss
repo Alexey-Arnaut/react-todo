@@ -2,11 +2,19 @@
     margin-top: 15px;
     width: 100%;
 
-    .form__field {
+    .input {
         border-color: var(--primary-border-color);
+
+        &:hover {
+            border-color: var(--tertiary-border-color);
+        }
+    
+        &:focus {
+            border-color: var(--tertiary-border-color);
+        }
     }
 
-    .form__label {
+    .input__label {
         background-color: var(--secondary-bg-color);
     }
 }

@@ -20,6 +20,7 @@ import { useLocation } from "react-router";
 import Todo from "./Todo";
 import TodoModal from "./TodoModal";
 import TodoEditSubtask from "./TodoEditSubtask";
+import Message from "../message";
 
 import img from "../../img/img.webp";
 import "./todos.scss";
@@ -38,6 +39,7 @@ const TodoList = () => {
   const [subtaskTitle, setSubtaskTitle] = React.useState("");
   const [value, setValue] = React.useState("");
   const [subtaskId, setSubtaskId] = React.useState("");
+  const [message, setMessage] = React.useState("");
 
   React.useEffect(() => {
     const params = {
@@ -82,6 +84,9 @@ const TodoList = () => {
       };
 
       dispatch(changeNameTodo(params));
+    } else {
+      setMessage("empty-field");
+      setTodoTitle(todos.find((todo) => todo.id === todoId).title);
     }
   };
 
@@ -134,6 +139,9 @@ const TodoList = () => {
       };
 
       dispatch(changeNameSubtask(params));
+    } else {
+      setMessage("empty-field");
+      setValue(subtasks.find((subtask) => subtask.id === subtaskId).title);
     }
   };
 
@@ -180,6 +188,7 @@ const TodoList = () => {
         setValue={setValue}
         changeNameSubtasks={changeNameSubtasks}
       />
+      <Message message={message} setMessage={setMessage} />
     </>
   );
 };

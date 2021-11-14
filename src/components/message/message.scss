@@ -1,5 +1,6 @@
 .message {
     position: absolute;
+    left: 50%;
     top: 20px;
     background-color: var(--danger-bg-color);
     padding: 15px 20px;
@@ -7,9 +8,10 @@
     perspective: 400px;
     opacity: 0;
     transform-style: preserve-3d;
-    transform: translateY(-50px);
+    transform: translateX(-50%);
     animation: show-message 1s forwards;
     transition: 0.5s;
+    z-index: 9999;
 }
 
 .message--succes {
@@ -18,7 +20,6 @@
 
 @keyframes show-message {
     100% {
-        transform: none;
         opacity: 1;
     }
 }
