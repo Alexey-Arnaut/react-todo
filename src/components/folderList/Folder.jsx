@@ -20,7 +20,7 @@ const Folder = ({
     >
       <h2 className="folder__title">{title}</h2>
       {link !== "/react-todo/" && active && (
-        <div className="folder__buttons">
+        <div className="folder__buttons" onClick={(e) => e.stopPropagation()}>
           <button
             className="folder__button"
             onClick={() => openModalEdit(id, title)}

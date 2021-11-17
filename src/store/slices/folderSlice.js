@@ -30,10 +30,11 @@ export const getFolders = createAsyncThunk(
 
 export const addNewFolder = createAsyncThunk(
   "folders/addNewFolder",
-  async ({ title, userId }, { dispatch }) => {
+  async ({ title, userId, time }, { dispatch }) => {
     const docRef = await addDoc(collection(db, "folders"), {
       title: title,
       userId: userId,
+      time: time,
     });
 
     dispatch(folders({ title: title, id: docRef.id }));
@@ -43,7 +44,6 @@ export const addNewFolder = createAsyncThunk(
 export const deleteFolder = createAsyncThunk(
   "folders/deleteFolder",
   async (folderId, { dispatch }) => {
-    console.log(folderId);
     await deleteDoc(doc(db, "folders", folderId));
 
     dispatch(remove(folderId));

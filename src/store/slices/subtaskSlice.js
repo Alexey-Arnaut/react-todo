@@ -34,12 +34,13 @@ export const getSubtasks = createAsyncThunk(
 
 export const addNewSubtask = createAsyncThunk(
   "subtasks/addNewSubtask",
-  async ({ title, todoId, userId }, { dispatch }) => {
+  async ({ title, todoId, userId, time }, { dispatch }) => {
     const docRef = await addDoc(collection(db, "subtasks"), {
       title: title,
       todoId: todoId,
       userId: userId,
       completed: false,
+      time: time,
     });
 
     dispatch(subtasks({ title: title, id: docRef.id }));

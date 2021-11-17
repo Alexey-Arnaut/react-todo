@@ -27,6 +27,7 @@ const Board = () => {
         title: value.replace(/ +/g, " ").trim(),
         folderId: pathname.slice(1),
         userId: user,
+        time: new Date().getTime(),
       };
 
       dispatch(addNewTodo(params));

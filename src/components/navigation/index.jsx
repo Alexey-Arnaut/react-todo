@@ -16,6 +16,7 @@ const Navigation = () => {
   const [value, setValue] = React.useState("");
   const [active, setActive] = React.useState(false);
   const [message, setMessage] = React.useState("");
+  const asideRef = React.useRef();
 
   const addFolder = (e) => {
     e.preventDefault();
@@ -24,6 +25,7 @@ const Navigation = () => {
       const params = {
         title: value.replace(/ +/g, " ").trim(),
         userId: user,
+        time: new Date().getTime(),
       };
 
       dispatch(addNewFolder(params));
@@ -34,7 +36,7 @@ const Navigation = () => {
   };
 
   return (
-    <aside className={`aside ${active ? "aside--active" : ""}`}>
+    <aside className={`aside ${active ? "aside--active" : ""}`} ref={asideRef}>
       <Message message={message} setMessage={setMessage} />
       <HeaderLogo />
       <FolderList />

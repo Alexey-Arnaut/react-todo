@@ -9,7 +9,7 @@ const TodoSubtask = ({
   addSubtask,
   remove,
   changeState,
-  openModal
+  openModal,
 }) => {
   return (
     <div className="todos__form-subtasks">
@@ -25,15 +25,18 @@ const TodoSubtask = ({
           Добавить
         </Button>
       </div>
-      {subtasks.map((subtask) => (
-        <Todo
-          key={subtask.id}
-          {...subtask}
-          remove={remove}
-          changeState={changeState}
-          openModal={openModal}
-        />
-      ))}
+      {subtasks
+        .slice()
+        .sort((a, b) => a.time - b.time)
+        .map((subtask) => (
+          <Todo
+            key={subtask.id}
+            {...subtask}
+            remove={remove}
+            changeState={changeState}
+            openModal={openModal}
+          />
+        ))}
     </div>
   );
 };

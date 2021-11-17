@@ -34,12 +34,13 @@ export const getTodos = createAsyncThunk(
 
 export const addNewTodo = createAsyncThunk(
   "todos/addNewTodo",
-  async ({ title, folderId, userId }, { dispatch }) => {
+  async ({ title, folderId, userId, time }, { dispatch }) => {
     const docRef = await addDoc(collection(db, "todos"), {
       title: title,
       folderId: folderId,
       userId: userId,
       completed: false,
+      time: time,
     });
 
     dispatch(todos({ title: title, id: docRef.id }));

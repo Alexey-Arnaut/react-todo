@@ -93,6 +93,14 @@
     .todos__form-button {
         margin-top: 15px;
     }
+
+    .todos__form-inner {
+        flex-direction: column;
+
+        .todos__form-button {
+            margin: 15px 0 0;
+        }
+    }
 }
 
 @media (max-width: 500px) {

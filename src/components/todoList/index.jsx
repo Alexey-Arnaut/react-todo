@@ -154,15 +154,18 @@ const TodoList = () => {
             <h1 className="todos__title">Тут пока ничего нет.</h1>
           </>
         )}
-        {todos.map((todo) => (
-          <Todo
-            key={todo.id}
-            {...todo}
-            remove={removeTodo}
-            changeState={changeStateTodos}
-            openModal={openModalTodo}
-          />
-        ))}
+        {todos
+          .slice()
+          .sort((a, b) => a.time - b.time)
+          .map((todo) => (
+            <Todo
+              key={todo.id}
+              {...todo}
+              remove={removeTodo}
+              changeState={changeStateTodos}
+              openModal={openModalTodo}
+            />
+          ))}
       </div>
       <TodoModal
         active={active}

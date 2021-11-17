@@ -4,8 +4,11 @@ import "./modal.scss";
 
 const Modal = ({ children, active, setActive }) => {
   return (
-    <div className={`modal ${active ? "modal--active" : ""}`}>
-      <div className="modal-content">
+    <div
+      className={`modal ${active ? "modal--active" : ""}`}
+      onClick={() => setActive(false)}
+    >
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <button
           className="modal__close"
           onClick={() => setActive(false)}

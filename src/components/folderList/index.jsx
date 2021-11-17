@@ -81,18 +81,21 @@ const FolderList = () => {
         }
         activeTodos={activeTodos}
       />
-      {folders.map((folder) => (
-        <Folder
-          key={folder.id}
-          {...folder}
-          link={`/${folder.id}`}
-          push={push}
-          active={pathname === `/${folder.id}` ? true : false}
-          activeTodos={activeTodos}
-          openModalRemove={openModalRemove}
-          openModalEdit={openModalEdit}
-        />
-      ))}
+      {folders
+        .slice()
+        .sort((a, b) => a.time - b.time)
+        .map((folder) => (
+          <Folder
+            key={folder.id}
+            {...folder}
+            link={`/${folder.id}`}
+            push={push}
+            active={pathname === `/${folder.id}` ? true : false}
+            activeTodos={activeTodos}
+            openModalRemove={openModalRemove}
+            openModalEdit={openModalEdit}
+          />
+        ))}
       <FolderEdit
         active={activeModalEdit}
         setActive={setActiveModalEdit}

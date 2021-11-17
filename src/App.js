@@ -20,7 +20,7 @@ function App() {
           path="/react-todo/reset-password"
           component={ResetPassword}
         />
-        {user !== null || localStorage.getItem("user") ? (
+        {user !== null ? (
           <Route exact path="/:folderId/" component={Home} />
         ) : (
           <Redirect to="/react-todo/login" />
